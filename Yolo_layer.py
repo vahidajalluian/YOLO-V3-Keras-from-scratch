@@ -1,12 +1,13 @@
+import tensorflow as tf
 from keras.models import Sequential, Model
 from keras.layers import Input, LSTM, Dense, Conv2D, LeakyReLU, ZeroPadding2D
 from keras.layers import concatenate
-from keras.activations import linear
 from keras.layers.normalization import BatchNormalization
+from keras.activations import linear
 from keras.optimizers import Adagrad
 from keras.utils import plot_model
 from keras.engine.topology import Layer
-import tensorflow as tf
+
 
 class YoloLayer(Layer):
     def __init__(self, anchors, max_grid, batch_size, warmup_batches, ignore_thresh, 
