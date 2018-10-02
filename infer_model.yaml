@@ -1,0 +1,5397 @@
+backend: tensorflow
+class_name: Model
+config:
+  input_layers:
+  - [Main_Input, 0, 0]
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape: !!python/tuple [null, 416, 416, 3]
+      dtype: float32
+      name: Main_Input
+      sparse: false
+    inbound_nodes: []
+    name: Main_Input
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: &id001 !!python/tuple [1, 1]
+      filters: 32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_1_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Main_Input
+        - 0
+        - 0
+        - {}
+    name: Layer_1_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_1_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_1_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_1_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_1_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_1_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_1_LRELU
+  - class_name: ZeroPadding2D
+    config:
+      data_format: channels_last
+      name: Layer_2_Zero_Padding
+      padding: !!python/tuple
+      - !!python/tuple [1, 0]
+      - !!python/tuple [1, 0]
+      trainable: true
+    inbound_nodes:
+    - - - Layer_1_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_2_Zero_Padding
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 64
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_2_CONV
+      padding: valid
+      strides: !!python/tuple [2, 2]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_2_Zero_Padding
+        - 0
+        - 0
+        - {}
+    name: Layer_2_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_2_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_2_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_2_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_2_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_2_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_2_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_3_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_2_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_3_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_3_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_3_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_3_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_3_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_3_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_3_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 64
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_4_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_3_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_4_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_4_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_4_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_4_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_4_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_4_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_4_LRELU
+  - class_name: Add
+    config: {name: Layer_5_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_2_LRELU
+        - 0
+        - 0
+        - &id002 {}
+      - - Layer_4_LRELU
+        - 0
+        - 0
+        - *id002
+    name: Layer_5_Shortcut_Add
+  - class_name: ZeroPadding2D
+    config:
+      data_format: channels_last
+      name: Layer_6_Zero_Padding
+      padding: !!python/tuple
+      - !!python/tuple [1, 0]
+      - !!python/tuple [1, 0]
+      trainable: true
+    inbound_nodes:
+    - - - Layer_5_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_6_Zero_Padding
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_6_CONV
+      padding: valid
+      strides: !!python/tuple [2, 2]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_6_Zero_Padding
+        - 0
+        - 0
+        - {}
+    name: Layer_6_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_6_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_6_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_6_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_6_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_6_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_6_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 64
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_7_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_6_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_7_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_7_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_7_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_7_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_7_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_7_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_7_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_8_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_7_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_8_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_8_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_8_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_8_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_8_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_8_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_8_LRELU
+  - class_name: Add
+    config: {name: Layer_9_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_6_LRELU
+        - 0
+        - 0
+        - &id003 {}
+      - - Layer_8_LRELU
+        - 0
+        - 0
+        - *id003
+    name: Layer_9_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 64
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_10_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_9_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_10_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_10_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_10_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_10_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_10_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_10_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_10_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_11_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_10_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_11_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_11_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_11_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_11_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_11_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_11_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_11_LRELU
+  - class_name: Add
+    config: {name: Layer_12_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_9_Shortcut_Add
+        - 0
+        - 0
+        - &id004 {}
+      - - Layer_11_LRELU
+        - 0
+        - 0
+        - *id004
+    name: Layer_12_Shortcut_Add
+  - class_name: ZeroPadding2D
+    config:
+      data_format: channels_last
+      name: Layer_13_Zero_Padding
+      padding: !!python/tuple
+      - !!python/tuple [1, 0]
+      - !!python/tuple [1, 0]
+      trainable: true
+    inbound_nodes:
+    - - - Layer_12_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_13_Zero_Padding
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_13_CONV
+      padding: valid
+      strides: !!python/tuple [2, 2]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_13_Zero_Padding
+        - 0
+        - 0
+        - {}
+    name: Layer_13_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_12_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_13_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_12_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_13_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_12_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_13_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_14_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_13_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_14_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_14_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_14_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_14_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_14_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_14_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_14_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_15_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_14_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_15_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_15_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_15_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_15_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_15_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_15_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_15_LRELU
+  - class_name: Add
+    config: {name: Layer_16_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_13_LRELU
+        - 0
+        - 0
+        - &id005 {}
+      - - Layer_15_LRELU
+        - 0
+        - 0
+        - *id005
+    name: Layer_16_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_17_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_16_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_17_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_17_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_17_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_17_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_17_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_17_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_17_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_18_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_17_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_18_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: Layer_18_Batch
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_18_CONV
+        - 0
+        - 0
+        - {}
+    name: Layer_18_Batch
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_18_LRELU, trainable: true}
+    inbound_nodes:
+    - - - Layer_18_Batch
+        - 0
+        - 0
+        - {}
+    name: Layer_18_LRELU
+  - class_name: Add
+    config: {name: Layer_19_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_16_Shortcut_Add
+        - 0
+        - 0
+        - &id006 {}
+      - - Layer_18_LRELU
+        - 0
+        - 0
+        - *id006
+    name: Layer_19_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_20_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_19_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_20_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_1
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_20_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_1
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_20_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_1
+        - 0
+        - 0
+        - {}
+    name: Layer_20_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_21_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_20_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_21_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_2
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_21_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_2
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_21_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_2
+        - 0
+        - 0
+        - {}
+    name: Layer_21_LRELU
+  - class_name: Add
+    config: {name: Layer_22_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_19_Shortcut_Add
+        - 0
+        - 0
+        - &id007 {}
+      - - Layer_21_LRELU
+        - 0
+        - 0
+        - *id007
+    name: Layer_22_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_23_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_22_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_23_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_3
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_23_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_3
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_23_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_3
+        - 0
+        - 0
+        - {}
+    name: Layer_23_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_24_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_23_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_24_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_4
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_24_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_4
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_24_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_4
+        - 0
+        - 0
+        - {}
+    name: Layer_24_LRELU
+  - class_name: Add
+    config: {name: Layer_25_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_22_Shortcut_Add
+        - 0
+        - 0
+        - &id008 {}
+      - - Layer_24_LRELU
+        - 0
+        - 0
+        - *id008
+    name: Layer_25_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_26_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_25_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_26_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_5
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_26_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_5
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_26_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_5
+        - 0
+        - 0
+        - {}
+    name: Layer_26_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_27_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_26_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_27_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_6
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_27_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_6
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_27_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_6
+        - 0
+        - 0
+        - {}
+    name: Layer_27_LRELU
+  - class_name: Add
+    config: {name: Layer_28_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_25_Shortcut_Add
+        - 0
+        - 0
+        - &id009 {}
+      - - Layer_27_LRELU
+        - 0
+        - 0
+        - *id009
+    name: Layer_28_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_29_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_28_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_29_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_7
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_29_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_7
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_29_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_7
+        - 0
+        - 0
+        - {}
+    name: Layer_29_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_30_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_29_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_30_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_8
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_30_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_8
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_30_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_8
+        - 0
+        - 0
+        - {}
+    name: Layer_30_LRELU
+  - class_name: Add
+    config: {name: Layer_31_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_28_Shortcut_Add
+        - 0
+        - 0
+        - &id010 {}
+      - - Layer_30_LRELU
+        - 0
+        - 0
+        - *id010
+    name: Layer_31_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_32_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_31_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_32_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_9
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_32_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_9
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_32_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_9
+        - 0
+        - 0
+        - {}
+    name: Layer_32_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_33_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_32_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_33_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_10
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_33_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_10
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_33_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_10
+        - 0
+        - 0
+        - {}
+    name: Layer_33_LRELU
+  - class_name: Add
+    config: {name: Layer_34_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_31_Shortcut_Add
+        - 0
+        - 0
+        - &id011 {}
+      - - Layer_33_LRELU
+        - 0
+        - 0
+        - *id011
+    name: Layer_34_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_35_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_34_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_35_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_11
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_35_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_11
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_35_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_11
+        - 0
+        - 0
+        - {}
+    name: Layer_35_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_36_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_35_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_36_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_12
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_36_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_12
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_36_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_12
+        - 0
+        - 0
+        - {}
+    name: Layer_36_LRELU
+  - class_name: Add
+    config: {name: Layer_37_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - Layer_34_Shortcut_Add
+        - 0
+        - 0
+        - &id012 {}
+      - - Layer_36_LRELU
+        - 0
+        - 0
+        - *id012
+    name: Layer_37_Shortcut_Add
+  - class_name: ZeroPadding2D
+    config:
+      data_format: channels_last
+      name: Layer_38_Zero_Padding
+      padding: !!python/tuple
+      - !!python/tuple [1, 0]
+      - !!python/tuple [1, 0]
+      trainable: true
+    inbound_nodes:
+    - - - Layer_37_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: Layer_38_Zero_Padding
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: Layer_38_CONV
+      padding: valid
+      strides: !!python/tuple [2, 2]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_38_Zero_Padding
+        - 0
+        - 0
+        - {}
+    name: Layer_38_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_13
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_38_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_13
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: Layer_38_LRELU, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_13
+        - 0
+        - 0
+        - {}
+    name: Layer_38_LRELU
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: Layer_39_CONV
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_38_LRELU
+        - 0
+        - 0
+        - {}
+    name: Layer_39_CONV
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_14
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - Layer_39_CONV
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_14
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_1, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_14
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_1
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_1
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_1
+        - 0
+        - 0
+        - {}
+    name: conv2d_1
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_15
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_1
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_15
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_2, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_15
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_2
+  - class_name: Add
+    config: {name: Layer_41_Shortcut_Add, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_2
+        - 0
+        - 0
+        - &id013 {}
+      - - Layer_38_LRELU
+        - 0
+        - 0
+        - *id013
+    name: Layer_41_Shortcut_Add
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_2
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_41_Shortcut_Add
+        - 0
+        - 0
+        - {}
+    name: conv2d_2
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_16
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_2
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_16
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_3, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_16
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_3
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_3
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_3
+        - 0
+        - 0
+        - {}
+    name: conv2d_3
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_17
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_3
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_17
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_4, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_17
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_4
+  - class_name: Add
+    config: {name: add_1, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_4
+        - 0
+        - 0
+        - &id014 {}
+      - - Layer_41_Shortcut_Add
+        - 0
+        - 0
+        - *id014
+    name: add_1
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_4
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_1
+        - 0
+        - 0
+        - {}
+    name: conv2d_4
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_18
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_4
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_18
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_5, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_18
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_5
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_5
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_5
+        - 0
+        - 0
+        - {}
+    name: conv2d_5
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_19
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_5
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_19
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_6, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_19
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_6
+  - class_name: Add
+    config: {name: add_2, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_6
+        - 0
+        - 0
+        - &id015 {}
+      - - add_1
+        - 0
+        - 0
+        - *id015
+    name: add_2
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_6
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_2
+        - 0
+        - 0
+        - {}
+    name: conv2d_6
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_20
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_6
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_20
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_7, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_20
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_7
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_7
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_7
+        - 0
+        - 0
+        - {}
+    name: conv2d_7
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_21
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_7
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_21
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_8, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_21
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_8
+  - class_name: Add
+    config: {name: add_3, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_8
+        - 0
+        - 0
+        - &id016 {}
+      - - add_2
+        - 0
+        - 0
+        - *id016
+    name: add_3
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_8
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_3
+        - 0
+        - 0
+        - {}
+    name: conv2d_8
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_22
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_8
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_22
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_9, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_22
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_9
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_9
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_9
+        - 0
+        - 0
+        - {}
+    name: conv2d_9
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_23
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_9
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_23
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_10, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_23
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_10
+  - class_name: Add
+    config: {name: add_4, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_10
+        - 0
+        - 0
+        - &id017 {}
+      - - add_3
+        - 0
+        - 0
+        - *id017
+    name: add_4
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_10
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_4
+        - 0
+        - 0
+        - {}
+    name: conv2d_10
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_24
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_10
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_24
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_11, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_24
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_11
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_11
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_11
+        - 0
+        - 0
+        - {}
+    name: conv2d_11
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_25
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_11
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_25
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_12, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_25
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_12
+  - class_name: Add
+    config: {name: add_5, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_12
+        - 0
+        - 0
+        - &id018 {}
+      - - add_4
+        - 0
+        - 0
+        - *id018
+    name: add_5
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_12
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_5
+        - 0
+        - 0
+        - {}
+    name: conv2d_12
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_26
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_12
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_26
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_13, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_26
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_13
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_13
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_13
+        - 0
+        - 0
+        - {}
+    name: conv2d_13
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_27
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_13
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_27
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_14, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_27
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_14
+  - class_name: Add
+    config: {name: add_6, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_14
+        - 0
+        - 0
+        - &id019 {}
+      - - add_5
+        - 0
+        - 0
+        - *id019
+    name: add_6
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_14
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_6
+        - 0
+        - 0
+        - {}
+    name: conv2d_14
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_28
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_14
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_28
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_15, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_28
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_15
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_15
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_15
+        - 0
+        - 0
+        - {}
+    name: conv2d_15
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_29
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_15
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_29
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_16, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_29
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_16
+  - class_name: Add
+    config: {name: add_7, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_16
+        - 0
+        - 0
+        - &id020 {}
+      - - add_6
+        - 0
+        - 0
+        - *id020
+    name: add_7
+  - class_name: ZeroPadding2D
+    config:
+      data_format: channels_last
+      name: Layer_63_Zero_Padding
+      padding: !!python/tuple
+      - !!python/tuple [1, 0]
+      - !!python/tuple [1, 0]
+      trainable: true
+    inbound_nodes:
+    - - - add_7
+        - 0
+        - 0
+        - {}
+    name: Layer_63_Zero_Padding
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_16
+      padding: valid
+      strides: !!python/tuple [2, 2]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - Layer_63_Zero_Padding
+        - 0
+        - 0
+        - {}
+    name: conv2d_16
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_30
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_16
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_30
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_17, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_30
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_17
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_17
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_17
+        - 0
+        - 0
+        - {}
+    name: conv2d_17
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_31
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_17
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_31
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_18, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_31
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_18
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_18
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_18
+        - 0
+        - 0
+        - {}
+    name: conv2d_18
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_32
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_18
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_32
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_19, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_32
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_19
+  - class_name: Add
+    config: {name: add_8, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_19
+        - 0
+        - 0
+        - &id021 {}
+      - - leaky_re_lu_17
+        - 0
+        - 0
+        - *id021
+    name: add_8
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_19
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_8
+        - 0
+        - 0
+        - {}
+    name: conv2d_19
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_33
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_19
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_33
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_20, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_33
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_20
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_20
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_20
+        - 0
+        - 0
+        - {}
+    name: conv2d_20
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_34
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_20
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_34
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_21, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_34
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_21
+  - class_name: Add
+    config: {name: add_9, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_21
+        - 0
+        - 0
+        - &id022 {}
+      - - add_8
+        - 0
+        - 0
+        - *id022
+    name: add_9
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_21
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_9
+        - 0
+        - 0
+        - {}
+    name: conv2d_21
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_35
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_21
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_35
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_22, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_35
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_22
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_22
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_22
+        - 0
+        - 0
+        - {}
+    name: conv2d_22
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_36
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_22
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_36
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_23, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_36
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_23
+  - class_name: Add
+    config: {name: add_10, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_23
+        - 0
+        - 0
+        - &id023 {}
+      - - add_9
+        - 0
+        - 0
+        - *id023
+    name: add_10
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_23
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_10
+        - 0
+        - 0
+        - {}
+    name: conv2d_23
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_37
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_23
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_37
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_24, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_37
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_24
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_24
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_24
+        - 0
+        - 0
+        - {}
+    name: conv2d_24
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_38
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_24
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_38
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_25, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_38
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_25
+  - class_name: Add
+    config: {name: add_11, trainable: true}
+    inbound_nodes:
+    - - - leaky_re_lu_25
+        - 0
+        - 0
+        - &id024 {}
+      - - add_10
+        - 0
+        - 0
+        - *id024
+    name: add_11
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_25
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - add_11
+        - 0
+        - 0
+        - {}
+    name: conv2d_25
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_39
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_25
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_39
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_26, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_39
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_26
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_26
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_26
+        - 0
+        - 0
+        - {}
+    name: conv2d_26
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_40
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_26
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_40
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_27, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_40
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_27
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_27
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_27
+        - 0
+        - 0
+        - {}
+    name: conv2d_27
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_41
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_27
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_41
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_28, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_41
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_28
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_28
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_28
+        - 0
+        - 0
+        - {}
+    name: conv2d_28
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_42
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_28
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_42
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_29, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_42
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_29
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_29
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_29
+        - 0
+        - 0
+        - {}
+    name: conv2d_29
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_43
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_29
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_43
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_30, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_43
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_30
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_32
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_30
+        - 0
+        - 0
+        - {}
+    name: conv2d_32
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_45
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_32
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_45
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_32, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_45
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_32
+  - class_name: UpSampling2D
+    config:
+      data_format: channels_last
+      name: up_sampling2d_1
+      size: !!python/tuple [2, 2]
+      trainable: true
+    inbound_nodes:
+    - - - leaky_re_lu_32
+        - 0
+        - 0
+        - {}
+    name: up_sampling2d_1
+  - class_name: Concatenate
+    config: {axis: -1, name: concatenate_1, trainable: true}
+    inbound_nodes:
+    - - - up_sampling2d_1
+        - 0
+        - 0
+        - &id025 {}
+      - - add_7
+        - 0
+        - 0
+        - *id025
+    name: concatenate_1
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_33
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - concatenate_1
+        - 0
+        - 0
+        - {}
+    name: conv2d_33
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_46
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_33
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_46
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_33, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_46
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_33
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_34
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_33
+        - 0
+        - 0
+        - {}
+    name: conv2d_34
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_47
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_34
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_47
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_34, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_47
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_34
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_35
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_34
+        - 0
+        - 0
+        - {}
+    name: conv2d_35
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_48
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_35
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_48
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_35, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_48
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_35
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_36
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_35
+        - 0
+        - 0
+        - {}
+    name: conv2d_36
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_49
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_36
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_49
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_36, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_49
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_36
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_37
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_36
+        - 0
+        - 0
+        - {}
+    name: conv2d_37
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_50
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_37
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_50
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_37, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_50
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_37
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_40
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_37
+        - 0
+        - 0
+        - {}
+    name: conv2d_40
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_52
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_40
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_52
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_39, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_52
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_39
+  - class_name: UpSampling2D
+    config:
+      data_format: channels_last
+      name: up_sampling2d_2
+      size: !!python/tuple [2, 2]
+      trainable: true
+    inbound_nodes:
+    - - - leaky_re_lu_39
+        - 0
+        - 0
+        - {}
+    name: up_sampling2d_2
+  - class_name: Concatenate
+    config: {axis: -1, name: concatenate_2, trainable: true}
+    inbound_nodes:
+    - - - up_sampling2d_2
+        - 0
+        - 0
+        - &id026 {}
+      - - Layer_37_Shortcut_Add
+        - 0
+        - 0
+        - *id026
+    name: concatenate_2
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_41
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - concatenate_2
+        - 0
+        - 0
+        - {}
+    name: conv2d_41
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_53
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_41
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_53
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_40, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_53
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_40
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_42
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_40
+        - 0
+        - 0
+        - {}
+    name: conv2d_42
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_54
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_42
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_54
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_41, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_54
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_41
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_43
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_41
+        - 0
+        - 0
+        - {}
+    name: conv2d_43
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_55
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_43
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_55
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_42, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_55
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_42
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_44
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_42
+        - 0
+        - 0
+        - {}
+    name: conv2d_44
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_56
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_44
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_56
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_43, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_56
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_43
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_45
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_43
+        - 0
+        - 0
+        - {}
+    name: conv2d_45
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_57
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_45
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_57
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_44, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_57
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_44
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 1024
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_30
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_30
+        - 0
+        - 0
+        - {}
+    name: conv2d_30
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 512
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_38
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_37
+        - 0
+        - 0
+        - {}
+    name: conv2d_38
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 256
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [3, 3]
+      name: conv2d_46
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: false
+    inbound_nodes:
+    - - - leaky_re_lu_44
+        - 0
+        - 0
+        - {}
+    name: conv2d_46
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_44
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_30
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_44
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_51
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_38
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_51
+  - class_name: BatchNormalization
+    config:
+      axis: -1
+      beta_constraint: null
+      beta_initializer:
+        class_name: Zeros
+        config: {}
+      beta_regularizer: null
+      center: true
+      epsilon: 0.001
+      gamma_constraint: null
+      gamma_initializer:
+        class_name: Ones
+        config: {}
+      gamma_regularizer: null
+      momentum: 0.99
+      moving_mean_initializer:
+        class_name: Zeros
+        config: {}
+      moving_variance_initializer:
+        class_name: Ones
+        config: {}
+      name: batch_normalization_58
+      scale: true
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_46
+        - 0
+        - 0
+        - {}
+    name: batch_normalization_58
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_31, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_44
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_31
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_38, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_51
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_38
+  - class_name: LeakyReLU
+    config: {alpha: 0.10000000149011612, name: leaky_re_lu_45, trainable: true}
+    inbound_nodes:
+    - - - batch_normalization_58
+        - 0
+        - 0
+        - {}
+    name: leaky_re_lu_45
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 255
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_31
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - leaky_re_lu_31
+        - 0
+        - 0
+        - {}
+    name: conv2d_31
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 255
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_39
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - leaky_re_lu_38
+        - 0
+        - 0
+        - {}
+    name: conv2d_39
+  - class_name: Conv2D
+    config:
+      activation: linear
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id001
+      filters: 255
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [1, 1]
+      name: conv2d_47
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - leaky_re_lu_45
+        - 0
+        - 0
+        - {}
+    name: conv2d_47
+  name: model_1
+  output_layers:
+  - [conv2d_31, 0, 0]
+  - [conv2d_39, 0, 0]
+  - [conv2d_47, 0, 0]
+keras_version: 2.2.2
